@@ -1,0 +1,15 @@
+group_maap/maap/CheConstants$Endpoints.class
+group_maap/maap/CheOrganizationPermission.class
+group_maap/maap/MaapAttributeMapper.class
+group_maap/maap/CheTokenResponse.class
+group_maap/maap/CheOrganizationHelper.class
+group_maap/maap/LoginEventListenerProviderFactory.class
+group_maap/maap/CustomOIDCProtocolMapper.class
+group_maap/maap/CheOrganization.class
+group_maap/maap/CheUser.class
+group_maap/maap/CheConstants.class
+group_maap/maap/AbstractProviderMapper.class
+group_maap/maap/App.class
+group_maap/maap/LoginEventListenerProvider.class
+group_maap/maap/CheOrganizationHelper$1.class
+group_maap/maap/EmailToOrgConverter.class
