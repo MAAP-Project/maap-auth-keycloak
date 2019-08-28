@@ -18,12 +18,12 @@ public class CheOrganizationHelper {
 
     	Client client = ResteasyClientBuilder.newClient();
     	
-    	WebTarget target = client.target(CheConstants.CHE_BASE_URL + CheConstants.Endpoints.OIDC_TOKEN);
+    	WebTarget target = client.target(MaapConstants.Che.Endpoints.OIDC_TOKEN);
     	Form form = new Form()
     			.param("grant_type", "password")
-    			.param("client_id", CheConstants.CHE_CLIENT_ID)
-    			.param("username", CheConstants.CHE_ADMIN_USERNAME)
-    			.param("password", CheConstants.CHE_ADMIN_PASSWORD);
+    			.param("client_id", MaapConstants.Che.CLIENT_ID)
+    			.param("username", MaapConstants.Che.ADMIN_USERNAME)
+    			.param("password", MaapConstants.Che.ADMIN_PASSWORD);
     	Response response = target
     			.request()
     			.accept("application/json")
@@ -41,7 +41,7 @@ public class CheOrganizationHelper {
 
     	Client client = ResteasyClientBuilder.newClient();
 
-    	WebTarget target = client.target(CheConstants.CHE_BASE_URL + CheConstants.Endpoints.FIND_USER)
+    	WebTarget target = client.target(MaapConstants.Che.Endpoints.FIND_USER)
     	                         .queryParam("name", username);
 
     	Response response = target
@@ -61,7 +61,7 @@ public class CheOrganizationHelper {
 
     	Client client = ResteasyClientBuilder.newClient();
 
-    	WebTarget target = client.target(CheConstants.CHE_BASE_URL + CheConstants.Endpoints.ORGANIZATION);
+    	WebTarget target = client.target(MaapConstants.Che.Endpoints.ORGANIZATION);
 
     	List<CheOrganization> cheOrganizations = target
     			.request()
@@ -90,7 +90,7 @@ public class CheOrganizationHelper {
         	CheOrganizationPermission parentPermission = new CheOrganizationPermission();
         	parentPermission.setdomainId("organization");
         	parentPermission.setuserId(userId);
-        	parentPermission.setinstanceId(CheConstants.MAAP_ORG_ID);
+        	parentPermission.setinstanceId(MaapConstants.Che.MAAP_ORG_ID);
         	String[] permissions = new String[1];
         	permissions[0] = "createWorkspaces";
         	parentPermission.setactions(permissions);
@@ -99,7 +99,7 @@ public class CheOrganizationHelper {
         	String jsonString = gson.toJson(parentPermission);
         
         	
-        	client1.target(CheConstants.CHE_BASE_URL + CheConstants.Endpoints.PERMISSIONS)
+        	client1.target(MaapConstants.Che.Endpoints.PERMISSIONS)
                 .request()
       			.header("Authorization", "Bearer " + token)
       			.header("Content-Type", "application/json")
@@ -111,14 +111,14 @@ public class CheOrganizationHelper {
         	//2) Create new org with the name [MAAP Org]/[Name of user]
         	Client client2 = ResteasyClientBuilder.newClient();
         	CheOrganization cheOrg = new CheOrganization();
-        	cheOrg.setqualifiedName(CheConstants.MAAP_ORG_NAME + "/" + EmailToOrgConverter.convertEmail(username));
+        	cheOrg.setqualifiedName(MaapConstants.Che.MAAP_ORG_NAME + "/" + EmailToOrgConverter.convertEmail(username));
         	cheOrg.setname(EmailToOrgConverter.convertEmail(username));
-        	cheOrg.setparent(CheConstants.MAAP_ORG_ID);
+        	cheOrg.setparent(MaapConstants.Che.MAAP_ORG_ID);
         	
         	gson = new Gson();
         	jsonString = gson.toJson(cheOrg);
         	
-        	CheOrganization userOrg = client2.target(CheConstants.CHE_BASE_URL + CheConstants.Endpoints.ORGANIZATION)
+        	CheOrganization userOrg = client2.target(MaapConstants.Che.Endpoints.ORGANIZATION)
                 .request()
       			.header("Authorization", "Bearer " + token)
                 .post(Entity.json(jsonString))
@@ -144,7 +144,7 @@ public class CheOrganizationHelper {
         	gson = new Gson();
         	jsonString = gson.toJson(userOrgPermission);
         	
-        	client3.target(CheConstants.CHE_BASE_URL + CheConstants.Endpoints.PERMISSIONS)
+        	client3.target(MaapConstants.Che.Endpoints.PERMISSIONS)
                 .request()
       			.header("Authorization", "Bearer " + token)
                 .post(Entity.json(jsonString));
