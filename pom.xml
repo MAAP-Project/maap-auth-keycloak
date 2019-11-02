@@ -11,7 +11,7 @@
   <url>http://maven.apache.org</url>
 
   <properties>
-		<keycloak.version>6.0.1</keycloak.version>
+		<keycloak.version>7.0.1</keycloak.version>
   </properties>
 
   <dependencies>
